@@ -5,6 +5,7 @@ common attributes/methods for other classes"""
 
 import uuid
 from datetime import datetime
+from models import storage
 timeformat = "%Y-%m-%dT%H:%M:%S.%f"
 
 
@@ -17,15 +18,17 @@ class BaseModel:
 
         if kwargs:
             for key, value in kwargs.items():
-                if key !=  "__class__":
+                if key != "__class__":
                     setattr(self, key, value)
-            self.created_at = datetime.strptime(kwargs["created_at"], timeformat)
-            self.updated_at = datetime.strptime(kwargs["updated_at"], timeformat)
+            self.created_at = datetime.strptime(kwargs["created_at"],
+                                                timeformat)
+            self.updated_at = datetime.strptime(kwargs["updated_at"],
+                                                timeformat)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-        
+            storage.new(self)
 
     def __str__(self):
         """this method overrides the inbuilt __str__ method"""
@@ -36,15 +39,15 @@ class BaseModel:
         """updates the public instance attribute updated_at with the
         current datetime"""
 
-        new_time = self.updated_at = datetime.now().isoformat()
-        return(new_time)
+        self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of
         __dict__ of the instance"""
 
         dicti = self.__dict__.copy()
-        dicti["created_at"] = datetime.now().isoformat()
-        dicti["updated_at"] = datetime.now().isoformat()
-        dicti["__class__"] = self.__class__.__name__.copy()
+        dicti["created_at"] = dicti["created_at"].isoformat()
+        dicti["updated_at"] = dicti["updated_at"].isoformat()
+        dicti["__class__"] = self.__class__.__name__
         return(dicti)
