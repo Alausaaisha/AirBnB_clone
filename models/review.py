@@ -2,7 +2,10 @@
 """this module contains class Review that inherits from BaseModel"""
 
 
-class Review():
+from models.base_model import BaseModel
+
+
+class Review(BaseModel):
     """class created"""
 
     text = ""

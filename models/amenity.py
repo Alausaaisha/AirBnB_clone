@@ -2,7 +2,10 @@
 """this module contains class Amenity that inherits from BaseModel"""
 
 
-class Amenity():
+from models.base_model import BaseModel
+
+
+class Amenity(BaseModel):
     """class created"""
 
     name = ""
