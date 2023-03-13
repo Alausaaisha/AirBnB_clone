@@ -2,7 +2,10 @@
 """this module contains class City that inherits from BaseModel"""
 
 
-class City():
+from models.base_model import BaseModel
+
+
+class City(BaseModel):
     """class created"""
 
     name = ""
