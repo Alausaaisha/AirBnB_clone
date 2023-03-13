@@ -40,6 +40,7 @@ class FileStorage:
         If the file doesn’t exist, no exception should be raised)"""
 
         from models.base_model import BaseModel
+        from models.user import User
 
         try:
             with open(self.__file_path, 'r', encoding="UTF8") as f:
@@ -47,5 +48,7 @@ class FileStorage:
                 for key, value in new_dict.items():
                     if value["__class__"] == "BaseModel":
                         self.__objects[key] = BaseModel(**value)
+                    elif value["__class__"] == "User":
+                        self.__objects[key] = User(**value)
         except FileNotFoundError:
             pass
