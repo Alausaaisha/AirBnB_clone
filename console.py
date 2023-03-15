@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         (to the JSON file) and prints the id"""
 
         if len(arg) == 0:
-            print(** class name missing **)
+            print("** class name missing **")
         elif arg in classes:
             new_instance = eval(arg + '()')
             storage.save()
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         on the class name and id"""
 
         if len(arg) == 0:
-            print(** class name missing **)
+            print("** class name missing **")
 
 
 

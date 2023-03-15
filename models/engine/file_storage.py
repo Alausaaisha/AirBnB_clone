@@ -65,5 +65,5 @@ class FileStorage:
                         self.__objects[key] = Amenity(**value)
                     elif value["__class__"] == "Review":
                         self.__objects[key] = Review(**value)
-        except FileNotFoundError
+        except FileNotFoundError:
             pass
